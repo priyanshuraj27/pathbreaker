@@ -6,12 +6,8 @@ import {
   updateFlashcard,
   deleteFlashcard,
 } from "../controllers/flashcard.controllers.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const flashcardRouter = Router();
-
-// Secure all routes below
-flashcardRouter.use(verifyJWT);
 
 // POST /api/flashcards -> create flashcard
 // GET /api/flashcards -> get all flashcards (with optional filters)

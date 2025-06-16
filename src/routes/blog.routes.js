@@ -6,15 +6,14 @@ import {
   updateBlogById,
   deleteBlogById
 } from "../controllers/blog.controllers.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const blogRouter = Router();
 
 // Routes
 blogRouter.get("/", fetchBlogs);
 blogRouter.get("/:idOrSlug", fetchBlogByIdOrSlug);
-blogRouter.post("/", verifyJWT, createNewBlog);
-blogRouter.put("/:idOrSlug", verifyJWT, updateBlogById);
-blogRouter.delete("/:idOrSlug", verifyJWT, deleteBlogById);
+blogRouter.post("/", createNewBlog);
+blogRouter.put("/:idOrSlug", updateBlogById);
+blogRouter.delete("/:idOrSlug", deleteBlogById);
 
 export default blogRouter;

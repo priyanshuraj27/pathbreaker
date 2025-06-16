@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import {User} from "../models/user.models.js";
+import { User } from "../models/user.models.js";
 
 // CREATE
 const createUser = asyncHandler(async (req, res) => {
@@ -26,7 +26,7 @@ const createUser = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(201, user, "User created successfully"));
+    .json(new ApiResponse(201, "User created successfully", user));
 });
 
 // READ
@@ -40,7 +40,7 @@ const getUserById = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, user, "User fetched successfully"));
+    .json(new ApiResponse(200, "User fetched successfully", user));
 });
 
 // UPDATE
@@ -59,7 +59,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, user, "User updated successfully"));
+    .json(new ApiResponse(200, "User updated successfully", user));
 });
 
 // DELETE
@@ -74,7 +74,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, user, "User deleted successfully"));
+    .json(new ApiResponse(200, "User deleted successfully", user));
 });
 
 export {

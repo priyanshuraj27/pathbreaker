@@ -5,16 +5,13 @@ import {
   updateUser,
   deleteUser,
 } from "../controllers/user.controllers.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const UserRouter = Router();
 
 // PUBLIC: Create user
 UserRouter.post("/", createUser);
 
-// PROTECTED: Read, update, delete (require auth)
-UserRouter.use(verifyJWT);
-
+// PUBLIC: Read, update, delete (no auth)
 UserRouter.get("/:userId", getUserById);
 UserRouter.patch("/:userId", updateUser);
 UserRouter.delete("/:userId", deleteUser);

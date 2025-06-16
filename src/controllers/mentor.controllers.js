@@ -17,7 +17,7 @@ const mentors = [
 
 // Get all mentors
 export const getMentors = asyncHandler(async (req, res) => {
-  return res.status(200).json(new ApiResponse(200, mentors, "Mentors fetched successfully"));
+  return res.status(200).json(new ApiResponse(200, "Mentors fetched successfully", mentors));
 });
 
 // Get mentor by ID
@@ -25,9 +25,9 @@ export const getMentorById = asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id);
   const mentor = mentors.find(m => m.id === id);
   if (!mentor) {
-    return res.status(404).json({ success: false, message: "Mentor not found" });
+    return res.status(404).json(new ApiResponse(404, "Mentor not found", null, false));
   }
-  return res.status(200).json(new ApiResponse(200, mentor, "Mentor found"));
+  return res.status(200).json(new ApiResponse(200, "Mentor found", mentor));
 });
 
 // Get mentors by category
@@ -36,12 +36,12 @@ export const getMentorsByCategory = asyncHandler(async (req, res) => {
   const result = category === "All"
     ? mentors
     : mentors.filter(m => m.categories.includes(category));
-  return res.status(200).json(new ApiResponse(200, result, "Mentors by category"));
+  return res.status(200).json(new ApiResponse(200, "Mentors by category", result));
 });
 
 // Get all unique categories
 export const getCategories = asyncHandler(async (req, res) => {
   const set = new Set(["All", "IPMAT", "CUET", "Career Counselling"]);
   mentors.forEach(m => m.categories.forEach(c => set.add(c)));
-  return res.status(200).json(new ApiResponse(200, Array.from(set), "Categories fetched"));
+  return res.status(200).json(new ApiResponse(200, "Categories fetched", Array.from(set)));
 });

@@ -1,14 +1,14 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { Flashcard } from "../models/flashcard.models.js"; // ensure this model is defined
+import { Flashcard } from "../models/flashcard.models.js";
 
 // CREATE
 const createFlashcard = asyncHandler(async (req, res) => {
-  const { question, answer, category, difficulty } = req.body;
+  const { question, answer, category, difficulty, setTitle, setDescription, published, createdBy } = req.body;
 
-  if (!question || !answer || !category || !difficulty) {
-    throw new ApiError(400, "All fields are required");
+  if (!question || !answer || !category || !difficulty || !createdBy) {
+    throw new ApiError(400, "All fields are required, including createdBy");
   }
 
   const newFlashcard = await Flashcard.create({
@@ -16,11 +16,15 @@ const createFlashcard = asyncHandler(async (req, res) => {
     answer,
     category,
     difficulty,
+    setTitle,
+    setDescription,
+    published,
+    createdBy,
   });
 
   return res
     .status(201)
-    .json(new ApiResponse(201, newFlashcard, "Flashcard created successfully"));
+    .json(new ApiResponse(201, "Flashcard created successfully", newFlashcard));
 });
 
 // READ ALL (with optional filters)
@@ -37,7 +41,7 @@ const getFlashcards = asyncHandler(async (req, res) => {
   const flashcards = await Flashcard.find(filter);
   return res
     .status(200)
-    .json(new ApiResponse(200, flashcards, "Flashcards fetched successfully"));
+    .json(new ApiResponse(200, "Flashcards fetched successfully", flashcards));
 });
 
 // READ SINGLE
@@ -51,7 +55,7 @@ const getFlashcardById = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, flashcard, "Flashcard fetched successfully"));
+    .json(new ApiResponse(200, "Flashcard fetched successfully", flashcard));
 });
 
 // UPDATE
@@ -70,7 +74,7 @@ const updateFlashcard = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, flashcard, "Flashcard updated successfully"));
+    .json(new ApiResponse(200, "Flashcard updated successfully", flashcard));
 });
 
 // DELETE
@@ -84,7 +88,7 @@ const deleteFlashcard = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, flashcard, "Flashcard deleted successfully"));
+    .json(new ApiResponse(200, "Flashcard deleted successfully", flashcard));
 });
 
 export {
