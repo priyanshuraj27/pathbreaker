@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { Quiz, QuizAttempt } from "../models/quiz.models.js";
+import mongoose from "mongoose";
 
 // CREATE Quiz
 const createQuiz = asyncHandler(async (req, res) => {
@@ -34,7 +35,10 @@ const createQuiz = asyncHandler(async (req, res) => {
 const getQuizById = asyncHandler(async (req, res) => {
   const { quizId } = req.params;
 
-  const quiz = await Quiz.findOne({ id: quizId });
+  let quiz = await Quiz.findOne({ id: quizId });
+  if (!quiz && mongoose.Types.ObjectId.isValid(quizId)) {
+    quiz = await Quiz.findById(quizId);
+  }
 
   if (!quiz) {
     throw new ApiError(404, "Quiz not found");
