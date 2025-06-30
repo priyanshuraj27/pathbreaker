@@ -21,7 +21,6 @@ import blogRouter from "./routes/blog.routes.js";
 import studyMaterialRouter from "./routes/studyMaterial.routes.js";
 import mentorRouter from "./routes/mentor.routes.js";
 import flashcardRouter from './routes/flashcard.routes.js';
-
 // routes declaration
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", UserRouter);
@@ -29,4 +28,4 @@ app.use("/api/v1/blogs", blogRouter);
 app.use("/api/v1/study-materials", studyMaterialRouter);
 app.use("/api/v1/mentors", mentorRouter);
 app.use("/api/v1/flashcards", flashcardRouter);
-export { app };
+export {app};

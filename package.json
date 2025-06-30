@@ -4,6 +4,7 @@
   "description": "backend for AIspire",
   "main": "index.js",
   "scripts": {
+    "start": "node -r dotenv/config src/index.js",
     "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
   "author": "Priyanshu Raj",
