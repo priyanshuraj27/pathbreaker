@@ -5,7 +5,7 @@ import { app } from './app.js';
 dotenv.config({
     path: "./.env"
 });
-
+console.log("Environment variables loaded");
 
 connectDB()
     .then(() => {

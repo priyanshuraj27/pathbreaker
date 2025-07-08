@@ -4,11 +4,18 @@ import {
   getQuizById,
   updateQuiz,
   deleteQuiz,
-  getAllQuizzes
+  getAllQuizzes,
+  getQuizProgressByAttemptId,
+  getOverallUserQuizProgress,
+  startQuizAttempt,
+  submitQuizAttempt,
 } from "../controllers/quiz.controllers.js";
-
+// console.log("Quiz routes loaded");
 const QuizRouter = Router();
-
+QuizRouter.patch("/attempt/:attemptId/submit", submitQuizAttempt);
+QuizRouter.get("/progress/attempt/:attemptId", getQuizProgressByAttemptId);
+QuizRouter.get("/progress/:userId", getOverallUserQuizProgress);
+QuizRouter.post("/attempt/:quizId/start", startQuizAttempt);
 // PUBLIC: Create quiz
 QuizRouter.post("/", createQuiz);
 
@@ -19,5 +26,6 @@ QuizRouter.get("/", getAllQuizzes);
 QuizRouter.get("/:quizId", getQuizById);
 QuizRouter.patch("/:quizId", updateQuiz);
 QuizRouter.delete("/:quizId", deleteQuiz);
+
 
 export default QuizRouter;

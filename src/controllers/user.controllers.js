@@ -1,13 +1,13 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { User } from "../models/user.models.js";
+import User from "../models/user.models.js";
 
 // CREATE
 const createUser = asyncHandler(async (req, res) => {
-  const { email, username, firstName, lastName, photo } = req.body;
+  const { email, username, firstName, lastName, photo, password, hasPaid } = req.body;
 
-  if (!email || !username || !lastName || !photo) {
+  if (!email || !username || !lastName || !photo || !password) {
     throw new ApiError(400, "Missing required user fields");
   }
 
@@ -21,7 +21,9 @@ const createUser = asyncHandler(async (req, res) => {
     username,
     firstName,
     lastName,
-    photo
+    photo,
+    password,
+    hasPaid: hasPaid || false 
   });
 
   return res
