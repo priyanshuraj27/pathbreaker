@@ -29,7 +29,16 @@ const UserSchema = new Schema(
     education: { type: String },
     interests: [{ type: String }],
     profileCompleted: { type: Boolean, default: false },
-    hasPaid: { type: Boolean, default: false }, // ✅ subscription flag
+    hasPaid: { type: Boolean, default: false }, 
+    // userClass: {
+    //   type: Number,
+    // },
+    // careerGoals: {
+    //   type: String,
+    // },
+    preferences : {
+      type : String
+    },
   },
   { timestamps: true }
 );
