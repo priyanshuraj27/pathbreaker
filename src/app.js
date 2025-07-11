@@ -13,7 +13,7 @@ app.use(urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cookieParser());
 
-console.log("APP JS called");
+// console.log("APP JS called");
 // Routes import 
 import UserRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js';
